@@ -31,7 +31,7 @@ int main()
 
     int array[3] = {10, 5, 3};
     int *p = array;
-    cout << *p + 1 << "," << *(p + 1);
+    cout << *p + 1 << "," << *(p + 1) << endl;
 
     return 0;
 }
