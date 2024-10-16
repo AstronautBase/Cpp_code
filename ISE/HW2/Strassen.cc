@@ -33,12 +33,29 @@ Matrix subtract(Matrix A, Matrix B)
     return C;
 }
 
+Matrix multiply(Matrix A, Matrix B)
+{
+    int n = A.size();
+    Matrix C(n, vector<int>(n));
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            for (int k = 0; k < n; k++)
+            {
+                C[i][j] += A[i][k] * B[k][j];
+            }
+        }
+    }
+    return C;
+}
+
 Matrix strassen(Matrix A, Matrix B)
 {
     int n = A.size();
-    if (n == 1)
+    if (n <= 64)
     {
-        return Matrix(1, vector<int>(1, A[0][0] * B[0][0]));
+        return multiply(A, B);
     }
 
     int k = n / 2;
