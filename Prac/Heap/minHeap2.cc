@@ -1,5 +1,5 @@
-#include <iostream>
 #include <vector>
+#include <iostream>
 #include <string>
 #include <unordered_map>
 
@@ -7,38 +7,37 @@ using namespace std;
 
 class MinHeap
 {
-public:
-    MinHeap() : insert_cnt(0) {}
-    void push(int x);
-    int top();
-    int pop();
-    int size();
-    void decrease(int i, int k);
-
-private:
     vector<int> heap;
     vector<int> indices;
     int insert_cnt;
     void heapify_up(int index);
     void heapify_down(int index);
+
+public:
+    MinHeap() : insert_cnt(0) {};
+    void push(int x);
+    int pop();
+    int top();
+    int size();
+    void decrease(int i, int k);
 };
 
 void MinHeap::push(int x)
 {
     heap.push_back(x);
     indices.push_back(insert_cnt++);
-    heapify_up(indices.size() - 1);
+    heapify_up(heap.size() - 1);
 }
 
 int MinHeap::pop()
 {
-    int res = heap[0];
+    int min = heap[0];
     heap[0] = heap.back();
     indices[0] = indices.back();
     heap.pop_back();
     indices.pop_back();
     heapify_down(0);
-    return res;
+    return min;
 }
 
 int MinHeap::top()
@@ -100,6 +99,7 @@ void MinHeap::heapify_down(int index)
         {
             smallest = right;
         }
+
         if (smallest != index)
         {
             swap(heap[index], heap[smallest]);
@@ -112,4 +112,3 @@ void MinHeap::heapify_down(int index)
         }
     }
 }
-
